@@ -1,0 +1,35 @@
+{
+  "name": "multirepo-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "node-pg-migrate up",
+    "migrate:down": "node-pg-migrate down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johannesPhil/multirepo-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johannesPhil/multirepo-backend/issues"
+  },
+  "homepage": "https://github.com/johannesPhil/multirepo-backend#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "node-pg-migrate": "^8.0.3"
+  }
+}
