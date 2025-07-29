@@ -26,6 +26,6 @@ jobs:
           echo "Testing SSH connection..."
           ssh -i key.pem -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "whoami && pwd"
           echo "Deploying files..."
-          rsync -avz --delete -e "ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./ $EC2_USER@$EC2_HOST:/test/backend
+          rsync -avz --delete -e "ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./ $EC2_USER@$EC2_HOST:~/test/backend
           echo "Restarting backend..."
-          ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "cd /test/backend && npm install && pm2 restart backend || pm2 start index.js --name backend"
+          ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "cd ~/test/backend && npm install && pm2 restart backend || pm2 start index.js --name backend"
