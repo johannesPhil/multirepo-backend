@@ -34,6 +34,15 @@ jobs:
           echo "Deploying files..."
           rsync -avz --delete -e "ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" ./ $EC2_USER@$EC2_HOST:~/test/backend
           echo "Running Database migrations..."
-          ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "cd ~/test/backend && npm install && npx node-pg-migrate up"
+          ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "\
+          cd ~/test/backend && \
+          npm install && \
+          DATABASE_URL=\"$DATABASE_URL\" DB_SSL=\"$DB_SSL\" npx node-pg-migrate up\
+          "
           echo "Restarting backend..."
-          ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "cd ~/test/backend && npm install && pm2 restart backend || pm2 start index.js --name backend"
+          ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "\
+          cd ~/test/backend && \
+          npm install && \
+          DATABASE_URL=\"$DATABASE_URL\" DB_SSL=\"$DB_SSL\" pm2 restart backend || \
+          DATABASE_URL=\"$DATABASE_URL\" DB_SSL=\"$DB_SSL\" pm2 start index.js --name backend\
+          "
