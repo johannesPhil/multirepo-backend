@@ -50,7 +50,7 @@ jobs:
           cd ~/test/backend && \
           npm install && \
           echo 'DEBUG: DATABASE_URL is: ${DATABASE_URL}' && \
-          DATABASE_URL=\"$DATABASE_URL\" DB_SSL=\"$DB_SSL\" npx node-pg-migrate up\
+          DATABASE_URL=\"$DATABASE_URL\" DB_SSL=\"$DB_SSL\" npm run migrate\
           "
           echo "Restarting backend..."
           ssh -i key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $EC2_USER@$EC2_HOST "\
