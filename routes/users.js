@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const users = awaituserModel.getAllUsers();
+  const users = await userModel.getAllUsers();
 
   return res.status(200).json(users);
 });
